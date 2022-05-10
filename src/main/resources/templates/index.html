@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Home</title>
+    <div th:replace="fragments/header :: header"></div>
+    <style>
+body {
+    background-image :  url(https://images7.alphacoders.com/346/346541.jpg);
+    width:100%
+    height:auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+</style>
+</head>
+<body style="background-color:#f2eddf;">
+<div th:replace="fragments/navbar :: navbar"></div>
+<div class="container-fluid"><br>
+<!--<img src="https://images.alphacoders.com/113/thumb-1920-113793.jpg" width="2500" height="1100"/>-->
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

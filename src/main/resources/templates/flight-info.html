@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Flight info</title>
+    <div th:replace="fragments/header :: header"></div>
+    <style>
+           .container-fluid{
+            padding-top: 4vh;
+            padding-bottom: 8vh;
+        }
+
+
+
+    </style>
+</head>
+<body style="background-color:#f2eddf;">
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container-fluid text-center" style="max-width:550px; margin:0 auto"><br>
+
+
+    <div class="padding">
+        <div class="card">
+            <form action="#" th:action="@{'/flight/info/' + ${flight.id}}" method="post" th:object="${flight}">
+
+                <input type="hidden" th:field="*{id}">
+
+                <div class="card-header" style="background-color:#dedbcc;">
+                    <div class="text-center">
+                        <h5>
+                            <div align="center">Flight</div>
+                            <br>
+                            <div th:text="'&quot;' +
+                ${flight.departureCity.displayEnum}+'&quot;'+' &#x2192; ' +'&quot;'+${flight.destinationCity.displayEnum}+'&quot;'"></div>
+                        </h5>
+                    </div>
+                    <br>
+                </div>
+
+                <div class="card-body" style="background-color:#ebe3cd;">
+                    <div class="form-group row">
+                        <div class="form-group col-sm-6">
+                            <label for="departureCity">Departure city:</label>
+                            <input type="text" class="form-control" id="departureCity" th:field="*{departureCity}"
+                                   readonly style="background-color:#dedbcc;">
+                        </div>
+
+                        <div class="form-group col-sm-6">
+                            <label for="destinationCity">Destination city:</label>
+                            <input type="text" class="form-control" id="destinationCity"
+                                   th:field="*{destinationCity}" readonly style="background-color:#dedbcc;">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="form-group col-sm-6">
+                            <label for="departureDate">Departure date:</label>
+                            <input type="text" class="form-control" id="departureDate" th:field="*{departureDate}"
+                                   readonly style="background-color:#dedbcc;">
+                        </div>
+
+                        <div class="form-group col-sm-6">
+                            <label for="departureHour">Departure hour:</label>
+                            <input type="text" class="form-control" id="departureHour" th:field="*{departureHour}"
+                                   readonly style="background-color:#dedbcc;">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="form-group col-sm-6">
+                            <label for="airlineName">Airline company:</label>
+                            <input type="text" class="form-control" id="airlineName" th:field="*{airlineName}"
+                                   readonly style="background-color:#dedbcc;">
+                        </div>
+
+                        <div class="form-group col-sm-6">
+                            <label for="gateNumber">Gate number:</label>
+                            <input type="text" class="form-control" id="gateNumber" th:field="*{gateNumber}"
+                                   readonly style="background-color:#dedbcc;">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="form-group col-sm-6">
+                            <label for="businessClassTicketPrice">Business class ticket price(&euro;):</label>
+                            <input type="text" class="form-control" id="businessClassTicketPrice"
+                                   th:field="*{businessClassTicketPrice}" aria-describedby="priceInfo1" readonly
+                                   style="background-color:#dedbcc;">
+                            <small id="priceInfo1" class="form-text text-muted">30% off for the children < 12
+                                years</small>
+                        </div>
+
+                        <div class="form-group col-sm-6">
+                            <label for="economyClassTicketPrice">Economy class ticket price(&euro;):</label>
+                            <input type="text" class="form-control" id="economyClassTicketPrice"
+                                   th:field="*{economyClassTicketPrice}" aria-describedby="priceInfo2" readonly
+                                   style="background-color:#dedbcc;">
+                            <small id="priceInfo2" class="form-text text-muted">30% off for the children < 12
+                                years</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="form-group col-sm-6">
+                            <label for="businessClassSeats">Business class seats:</label>
+                            <input type="text" class="form-control" id="businessClassSeats"
+                                   th:value="${flight.businessClassSeats}" readonly style="background-color:#dedbcc;">
+                        </div>
+
+                        <div class="form-group col-sm-6">
+                            <label for="economyClassSeats">Economy class seats:</label>
+                            <input type="text" class="form-control" id="economyClassSeats"
+                                   th:value="${flight.economyClassSeats}" readonly style="background-color:#dedbcc;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer" style="background-color:#dedbcc;"><br>
+                    <div class="form-group row">
+                        <div class="form-group col-sm-6">
+                        <a th:href="@{'/flight/all'}" type="submit"
+                           class="btn btn-success text-body" ><b>Return Home</b></a><br>
+                        </div>
+                        <div class="form-group col-sm-6">
+                        <a th:href="@{'/flight/booking-clone/' + ${flight.id}}"
+                           class="btn btn-success text-body" ><b>Book flight</b></a>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

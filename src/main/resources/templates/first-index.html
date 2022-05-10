@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Home</title>
+    <div th:replace="fragments/header :: header"></div>
+    <style>
+body {
+    background-image :  url(https://images7.alphacoders.com/346/346541.jpg);
+    width:100%
+    height:auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+</style>
+</head>
+<body style="background-color:#f2eddf;">
+<div th:replace="fragments/navbar :: navbar"></div>
+<div class="container-fluid" style="max-width:500px; margin:0 auto"><br>
+    <div class="p-2" align="center">
+        <h2 style="color:#dedbcc;">Welcome, <span th:text="${username}"> guest!</span></h2>
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

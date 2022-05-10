@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<!--    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>-->
+    <title>Register Success</title>
+    <div th:replace="fragments/header :: header"></div>
+<!--    <link rel="stylesheet"-->
+<!--          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"-->
+<!--          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"-->
+<!--          crossorigin="anonymous">-->
+    <style>
+           body{
+            padding-top: 23vh;
+        }
+    </style>
+</head>
+<body style="background-color:#f2eddf;">
+<div class="container" align="center">
+    <div class="card">
+        <div class="card-header" style="background-color:#dedbcc;">
+            <div><h2>Hi, <span th:text="${user.fullName} + '&excl;'"></span></h2></div>
+        </div>
+        <div class="card-body" style="background-color:#ebe3cd;">
+            <div><h3>You have successfully registered!</h3></div>
+            <br>
+            <div><h3>In order to activate your account, please check your email address.</h3></div><br>
+        </div>
+        <div class="card-footer" style="background-color:#dedbcc;">
+            <div>
+                <h3><b>
+                    <a th:href="'https://' + ${user.email}"><p th:text="${user.email}"></p></a>
+                </b></h3>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

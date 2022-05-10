@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+<div th:fragment="navbar">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#dedbcc;">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/index"><b>Home</b></a>
+                </li>&nbsp;
+                <li class="nav-item active">
+                    <a class="nav-link" href="/flight/all"><b>Flights</b></a>
+                </li>&nbsp;
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink2" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        <b> Additional services</b>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink2"style="background-color:#dedbcc;">
+                        <a class="dropdown-item" th:href="@{https:www.booking.com/?aid=365746&label=footer}" target="_blank">Hotel</a>
+                        <a class="dropdown-item" th:href="@{https://www.rentalcars.com/?affiliateCode=polskieli340&preflang=en&adcamp=footer}" target="_blank">Car rental</a>
+                        <a class="dropdown-item" th:href="@{https://lot.rideways.com/en-gb/?utm_source=lot&utm_campaign=footer}" target="_blank">Transfer</a>
+                        <a class="dropdown-item" th:href="@{https://www.getyourguide.com/?partner_id=YO63WWV&utm_medium=transport_partners&cmp=footer}" target="_blank">Tours and attractions</a>
+                        <a class="dropdown-item" th:href="@{https://roundtheworld.staralliance.com/staralliance/en/round-the-world}" target="_blank">Round the world</a>
+                    </div>
+                </li>&nbsp;
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink3" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        <b>Passengers info</b>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink3"style="background-color:#dedbcc;">
+                        <a class="dropdown-item" >Check-in</a>
+                        <a class="dropdown-item" >Luggage and security</a>
+                        <a class="dropdown-item" >At the terminal</a>
+                    </div>
+                </li>&nbsp;
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="nav-link" th:href="@{/flight/save}" ><b>Add flight</b></a>
+                </li>&nbsp;
+                <li class="nav-item active" >
+                    <a class="nav-link" th:href="@{/aboutUs}"><b>About us</b></a>
+                </li>&nbsp;
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/contact}"><b>Contact</b></a>
+                </li>&nbsp;
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        <b>User menu</b>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" style="background-color:#dedbcc;">
+                        <a class="dropdown-item" th:href="@{/user/profile}">Profile</a>
+                        <a class="dropdown-item" th:href="@{/user/bookings/all}">Your bookings</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" th:href="@{/logout}">Logout</a>
+                    </div>
+                </li>&nbsp;
+            </ul>
+        </div>
+    </nav>
+</div>
+</body>
+</html>

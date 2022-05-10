@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Contact</title>
+    <div th:replace="fragments/header :: header"></div>
+    <style>
+           .container-fluid{
+            padding-top: 6vh;
+            padding-bottom: 8vh;
+        }
+
+    </style>
+</head>
+<body style="background-color:#f2eddf;">
+<div th:replace="fragments/navbar :: navbar"></div>
+<div class="container-fluid text-center" style="max-width:520px; margin:0 auto" align="center">
+    <div class="text-center" align="center">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2784.6749772763924!2d21.20151026686828!3d45.737612637011615!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47455d0d075c534d%3A0x667f82a8225ad7da!2sStrada%20Budai%20Deleanu%2047%2C%20Timi%C8%99oara%20300142!5e0!3m2!1sen!2sro!4v1651772705488!5m2!1sen!2sro"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <br><br>
+    <div class="text-center" align="center">
+        <h5>Program call-center: Luni-Vineri / 08:00-16:00</h5>
+
+        <h5>Telefon: +40 256 323232 </h5>
+
+        <h5>Email:<a th:href="@{mailto:flightbooking.itschool@gmail.com}"> flightbooking.itschool@gmail.com</a></h5>
+
+        <h5>Adresa: Strada Budai Deleanu, nr.47, 300142, Timisoara, Timis, Romania</h5>
+    </div>
+
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

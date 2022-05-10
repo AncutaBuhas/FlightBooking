@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Flights</title>
+    <div th:replace="fragments/header :: header"></div>
+    <style>
+           .container-fluid{
+            padding-top: 2vh;
+            padding-bottom: 8vh;
+        }
+
+    </style>
+</head>
+<body style="background-color:#f2eddf;">
+
+<div th:replace="fragments/navbar :: navbar"></div>
+<div class="container-fluid">
+    <h2>
+        <div class="text-center"><b>Flights</b></div>
+    </h2>
+    <div class="row">
+        <div class="col-lg-12">
+            <div th:switch="${flights}">
+                <table class="table table-bordered table-striped table-hover" id="flights-table">
+                    <thead>
+                    <tr class="table-secondary" align="center">
+                        <th scope="col">ID</th>
+                        <th scope="col">Flight number</th>
+                        <th scope="col">Departure city</th>
+                        <th scope="col">Destination city</th>
+                        <th scope="col">Departure date</th>
+                        <th scope="col">Departure hour</th>
+                        <th scope="col">Available seats</th>
+                        <th scope="col">Airline name</th>
+                        <th scope="col">Book flight</th>
+                        <th scope="col" sec:authorize="hasRole('ADMIN')">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${flights.empty}">
+                        <td colspan="8" class="alert alert-danger text-center"><h3><i>No Flights Available</i></h3></td>
+                    </tr>
+                    <tr th:each="flight : ${flights}" align="center">
+                        <td th:text="${flight.id}"></td>
+                        <td th:text="${flight.flightNo}"></td>
+                        <td th:text="${flight.departureCity.displayEnum}"></td>
+                        <td th:text="${flight.destinationCity.displayEnum}"></td>
+                        <td th:text="${flight.departureDate}"></td>
+                        <td th:text="${flight.departureHour}"></td>
+                        <td th:text="${flight.availableSeats}"></td>
+                        <td th:text="${flight.airlineName.displayEnum}"></td>
+                        <td>
+                            <a th:href="@{'/flight/info/' + ${flight.id}}" >
+                                <button type="button" class="btn btn-info" data-toggle="tooltip"
+                                        data-html="true"
+                                        data-placement="top"
+                                        th:attr="title='Book flight from '+'&quot;' +${flight.departureCity.displayEnum}+'&quot;'+' to ' +'&quot;'+${flight.destinationCity.displayEnum}+'&quot;'"
+
+                                        th:disabled="${flight.availableSeats eq 0}">
+                                    More info
+                                </button>
+                            </a>
+                        </td>
+                        <td sec:authorize="hasRole('ADMIN')">
+                            <a th:href="@{'/flight/update/' + ${flight.id}}" class="btn btn-primary"
+                               data-toggle="tooltip"
+                               th:attr="title='Update flight' +'&nbsp;'+'&quot;'+${flight.flightNo}+'&quot;'">Update</a>
+                            <a th:href="@{'/flight/delete/' + ${flight.id}}" class="btn btn-danger"
+                               data-toggle="tooltip"
+                               th:attr="title='Delete flight' +'&nbsp;'+'&quot;'+${flight.flightNo}+'&quot;'">Delete</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.5/datatables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#flights-table").DataTable()
+        });
+
+</script>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

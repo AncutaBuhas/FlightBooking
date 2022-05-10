@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Profile</title>
+    <div th:replace="fragments/header :: header"></div>
+    <style>
+        label{
+               text-align: Left;
+        }
+
+    </style>
+    <style>
+           .container-fluid{
+            padding-top: 12vh;
+            padding-bottom: 4vh;
+        }
+
+    </style>
+</head>
+<body style="background-color:#f2eddf;">
+<div th:replace="fragments/navbar :: navbar"></div>
+<br><br>
+<div class="container-fluid text-center" style="max-width:450px; margin:0 auto" align="center">
+    <div class="card">
+        <div class="card-header" style="background-color:#dedbcc;">
+            <div class="text-center">
+                <h2>Your profile</h2>
+            </div>
+        </div>
+
+        <form action="#" th:action="@{'/user/profile'}" method="get" th:object="${user}">
+            <input type="hidden" th:field="*{id}">
+            <div class="card-body" style="background-color:#ebe3cd;">
+
+                <div align="center">
+                    <h3><b>Full name:</b></h3><h4> <i th:text="${user.fullName}"></i></h4>
+                </div><hr>
+
+                <div align="center">
+                    <h3><b>Username:</b></h3><h4> <i th:text="${user.username}"></i></h4>
+                </div><hr>
+
+                <div align="center">
+                    <h3><b>Email:</b></h3><h4> <i th:text="${user.email}"></i></h4>
+                </div>
+
+            </div>
+
+            <div class="card-footer" style="background-color:#dedbcc;"><br>
+                <div class="text-center">
+                    <a th:href="@{/user/update}">
+                        <button type="button" class="btn btn-success text-body">
+                            Update Profile
+                        </button>
+                    </a>
+                </div>
+                <br>
+            </div>
+        </form>
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

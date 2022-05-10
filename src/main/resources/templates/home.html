@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Home</title>
+    <div th:replace="fragments/header :: header"></div>
+    <style>
+           .container-fluid{
+            padding-top: 25vh;
+            padding-bottom: 8vh;
+        }
+
+
+    </style>
+</head>
+<body style="background-color:#f2eddf;">
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color:#dedbcc;"><br></nav>
+<div class="container-fluid" style="max-width:800px; margin:0 auto"><br>
+    <div class="card">
+        <div class="card-header text-center" style="background-color:#dedbcc;">
+            <h3>Welcome guest!</h3>
+        </div>
+        <div class="card-body" style="background-color:#ebe3cd;">
+            <div class="p-2" align="center">
+                <h3> In order to visit our website, please <span><a th:href="@{/register}">Register</a></span> or
+                    <span><a th:href="@{/login}">Login</a>.</span></h3>
+            </div>
+        </div>
+        <div class="card-footer" style="background-color:#dedbcc;"></div>
+    </div>
+</div>
+    <div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

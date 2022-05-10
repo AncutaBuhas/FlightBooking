@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Your bookings</title>
+    <div th:replace="fragments/header :: header"></div>
+    <style>
+           .container-fluid{
+            padding-top: 2vh;
+            padding-bottom: 8vh;
+        }
+   </style>
+</head>
+<body style="background-color:#f2eddf;">
+
+<div th:replace="fragments/navbar :: navbar"></div>
+<div class="container-fluid"><br><br>
+    <h2><div class="text-center"><b>Your bookings</b></div></h2>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div th:switch="${bookings}">
+                <table class="table table-bordered table-striped table-hover" id="flights-table">
+                    <thead>
+                    <tr class="table-secondary" align="center">
+                        <th scope="col">#</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Booking number</th>
+                        <th scope="col">Departure city</th>
+                        <th scope="col">Destination city</th>
+                        <th scope="col">Departure date</th>
+                        <th scope="col">Departure hour</th>
+                        <th scope="col">Airline name</th>
+                        <th scope="col">Flight number</th>
+                        <th scope="col">Total amount</th>
+                        <th scope="col">Booking date</th>
+                        <th scope="col">Passengers</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="booking, iterStat : ${bookings}" align="center">
+                        <td th:text="${iterStat.count}" class="align-middle"></td>
+                        <td th:text="${booking.id}" class="align-middle"></td>
+                        <td th:text="${booking.bookingNo}" class="align-middle"></td>
+                        <td th:text="${booking.departureCity.displayEnum}" class="align-middle"></td>
+                        <td th:text="${booking.destinationCity.displayEnum}" class="align-middle"></td>
+                        <td th:text="${booking.departureDate}" class="align-middle"></td>
+                        <td th:text="${booking.departureHour}" class="align-middle"></td>
+                        <td th:text="${booking.airlineName.displayEnum}" class="align-middle"></td>
+                        <td th:text="${booking.flightNo}" class="align-middle"></td>
+                        <td th:text="${booking.totalAmount}" class="align-middle"></td>
+                        <td th:text="${booking.bookingDateAndTime}" class="align-middle"></td>
+                        <td>
+                            <ul th:each="passenger : ${booking.passengers}">
+                                <li th:text="${passenger.fullName}"></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a th:href="@{'/user/bookings/delete/' + ${booking.id}}" class="btn btn-danger" data-toggle="tooltip"
+                               th:attr="title='Delete booking' +'&nbsp;'+'&quot;'+${booking.bookingNo}+'&quot;'" >Delete</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.5/datatables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#flights-table").DataTable()
+        });
+</script>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

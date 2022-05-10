@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Book flight</title>
+    <div th:replace="fragments/header :: header"></div>
+    <style>
+           .container-fluid{
+            padding-top: 2vh;
+            padding-bottom: 8vh;
+        }
+
+    </style>
+    <script>
+    $( document ).ready(function() {
+    	document.getElementById("myForm").submit();
+    });
+    </script>
+</head>
+<body style="background-color:#f2eddf;">
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container-fluid" style="max-width:500px; margin:0 auto"><br>
+
+
+    <div class="padding">
+        <div class="card">
+            <form id="myForm" action="#" th:action="@{'/flight/booking-clone/' + ${flight.id}}" method="post" th:object="${flight}">
+
+                <input type="hidden" th:field="*{id}">
+
+                <div class="card-header" style="background-color:#dedbcc;"><br>
+                    <div class="text-center">
+                        <h5>
+                            <div align="center">Book flight</div>
+                            <br>
+                            <div th:text="'&quot;' +
+                ${flight.departureCity.displayEnum}+'&quot;'+' &#x2192; ' +'&quot;'+${flight.destinationCity.displayEnum}+'&quot;'"></div>
+                        </h5>
+                    </div>
+                    <br>
+                    <div th:if="${message}" class="alert alert-success text-center">
+                        [[${message}]]
+                    </div>
+                    <div th:if="${message1}" class="alert alert-info text-center">
+                        [[${message1}]]
+                    </div>
+                    <div th:if="${message2}" class="alert alert-info text-center">
+                        [[${message2}]]
+                    </div>
+                    <div th:if="${message3}" class="alert alert-info text-center">
+                        [[${message3}]]
+                    </div>
+                </div>
+
+                <div class="card-body" style="background-color:#ebe3cd;">
+                    <div class="text-center">
+                        For booking, please complete next inputs:
+                    </div>
+                    <br>
+
+                    <div class="form-group row p-2">
+                        <div class="form-group col-sm-6">
+                            <label>Business class seats:</label>
+                            <select class="form-control" style="background-color:#dedbcc;">
+                                <option ></option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-sm-6">
+                            <label>Economy class seats:</label>
+                            <select class="form-control" style="background-color:#dedbcc;">
+                                <option></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <label>Checked baggage:</label>
+                        <select class="form-control"  style="background-color:#dedbcc;">
+                            <option></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="card-footer" style="background-color:#dedbcc;"><br>
+                    <div class="text-center">
+                        <a th:href="@{'/flight/booking/' + ${booking.id}}">
+                            <button type="submit" class="btn btn-success text-body" data-toggle="tooltip"
+                                    data-html="true"
+                                    data-placement="top"
+                                    th:attr="title='Book flight from '+'&quot;' +${booking.departureCity.displayEnum}+'&quot;'+' to ' +'&quot;'+${booking.destinationCity.displayEnum}+'&quot;'"
+
+                                    th:disabled="${flight.availableSeats eq 0}">
+                                Add passengers
+                            </button>
+                        </a>
+                    </div>
+                    <br>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

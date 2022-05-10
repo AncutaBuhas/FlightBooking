@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add passenger</title>
+    <div th:replace="fragments/header :: header"></div>
+    <style>
+        label{
+               text-align: Left;
+        }
+
+    </style>
+    <style>
+           .container-fluid{
+            padding-top: 3vh;
+            padding-bottom: 10vh;
+        }
+   </style>
+</head>
+<body style="background-color:#f2eddf;">
+<div th:replace="fragments/navbar :: navbar"></div>
+<br><br>
+<div class="container-fluid text-center" style="max-width:500px; margin:0 auto">
+    <div class="card">
+        <div class="card-header" style="background-color:#dedbcc;"><br>
+            <div align="center">
+                <div class="text-center"><h2>Add passenger</h2></div>
+                <h5>
+                    <div><p>for flight</p></div>
+                    <div th:text="'&quot;' + ${flight.departureCity.displayEnum}+'&quot;'+' &#x2192; ' +'&quot;'+${flight.destinationCity.displayEnum}+'&quot;'"></div>
+                </h5>
+                <div th:if="${message4}" class="alert alert-warning text-center">
+                    [[${message4}]]
+                </div>
+                <div th:if="${message1}" class="alert alert-warning text-center">
+                    [[${message1}]]
+                </div>
+                <div th:if="${message2}" class="alert alert-success text-center">
+                    [[${message2}]]
+                </div>
+                <div th:if="${message3}" class="alert alert-warning text-center">
+                    [[${message3}]]
+                </div>
+            </div>
+        </div>
+
+        <form action="#" th:action="@{'/flight/addPassenger/' + ${booking.id}}" method="post" th:object="${booking}">
+            <input type="hidden" th:field="*{flight.id}">
+            <input type="hidden" th:field="*{id}">
+
+            <div class="card-body" style="background-color:#ebe3cd;">
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Full name:</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="passengerFullName" placeholder="Full name" class="form-control"
+                               onfocus=this.value="" required style="background-color:#dedbcc;"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Email:</label>
+                    <div class="col-sm-8">
+                        <input type="email" name="passengerEmailAddress" placeholder="Email address"
+                               class="form-control"
+                               onfocus=this.value="" required style="background-color:#dedbcc;"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Gender:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="passengerGender"
+                               id="inlineRadio1"
+                               value="Male">
+                        <label class="form-check-label" for="inlineRadio1">Male</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="passengerGender"
+                               id="inlineRadio2"
+                               value="Female">
+                        <label class="form-check-label" for="inlineRadio2">Female</label>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Age:</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="passengerAge" placeholder="Age" class="form-control"
+                               onfocus=this.value="" required style="background-color:#dedbcc;"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Mobile number:</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="passengerMobileNumber" placeholder="Mobile number" class="form-control"
+                               onfocus=this.value="" required style="background-color:#dedbcc;"/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Address:</label>
+                    <div class="col-sm-8">
+                    <textarea name="passengerAddress" placeholder="Address" class="form-control" rows="4"
+                              id="comment" required style="background-color:#dedbcc;"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Class type:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="form-check form-check-inline" >
+                        <input class="form-check-input" type="radio" name="passengerClassType"
+                               id="inlineRadio3"
+                               value="Business class">
+                        <label class="form-check-label" for="inlineRadio3">Business class</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="passengerClassType"
+                               id="inlineRadio4"
+                               value="Economy class">
+                        <label class="form-check-label" for="inlineRadio4">Economy class</label>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-5 col-form-label">Checked baggage:</label>
+                    <select class="form-control col-sm-6 " name="passengerCheckedBaggage" style="background-color:#dedbcc;">
+                        <option th:each="i : ${#numbers.sequence(0, 10)}" th:value="${i}"
+                                th:text="${i}"></option>
+                    </select>
+                </div>
+
+            </div>
+            <div class="card-footer" align="center" style="background-color:#dedbcc;"><br>
+                <div class="row" align="center">
+                    <div class="text-center col-sm-6">
+                        <button type="submit" th:disabled="${message2}" class="btn btn-success text-body"
+                                data-toggle="tooltip" th:attr="title='Save and add a new passenger'"><b>Add passenger</b>
+                        </button>
+                    </div>
+
+                    <div class="text-center col-sm-6">
+                        <a th:href="@{'/flight/payment/' + ${booking.id}}">
+                            <button type="button" class="btn btn-success text-body" data-toggle="tooltip"
+                                    data-html="true"
+                                    data-placement="top"
+                                    th:attr="title='Pay ticket from '+'&quot;' +${booking.departureCity.displayEnum}+'&quot;'+' to ' +'&quot;'+${booking.destinationCity.displayEnum}+'&quot;'"
+
+                                    th:disabled="${condition}">
+                                <b>Go to payment page</b>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </form>
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

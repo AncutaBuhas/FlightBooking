@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Update flight</title>
+    <div th:replace="fragments/header :: header"></div>
+    <style>
+        label{
+               text-align: Left;
+        }
+    </style>
+    <style>
+           .container-fluid{
+            padding-top: 12vh;
+            padding-bottom: 4vh;
+        }
+   </style>
+</head>
+<body style="background-color:#f2eddf;">
+<div th:replace="fragments/navbar :: navbar"></div>
+<br><br>
+<div class="container-fluid text-center" style="max-width:520px; margin:0 auto" align="center">
+    <div class="card">
+        <div class="card-header" style="background-color:#dedbcc;">
+            <div class="text-center"><h2>Update flight</h2></div>
+            <div th:if="${message}" class="alert alert-success text-center">
+                [[${message}]]
+            </div>
+        </div>
+
+        <form action="#" th:action="@{'/flight/update/' + ${flight.id}}" method="post" th:object="${flight}">
+            <input type="hidden" th:field="*{id}">
+            <div class="card-body" style="background-color:#ebe3cd;">
+                <div class="form-group row">
+                    <div class="col-sm-12" align="center">
+                        <select class="form-control selectpicker" th:field="*{departureCity}" id="departureCity"
+                                required style="background-color:#dedbcc;">
+                            <option value="">Select departure city</option>
+                            <option th:each="departureCity : ${T(flightBooking.entity.DepartureCity).values()}"
+                                    th:value="${departureCity}" th:text="${departureCity.displayEnum}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-12" align="center">
+                        <select class="form-control selectpicker" th:field="*{destinationCity}" id="destinationCity"
+                                required style="background-color:#dedbcc;">
+                            <option value="">Select destination city</option>
+                            <option th:each="destinationCity : ${T(flightBooking.entity.DestinationCity).values()}"
+                                    th:value="${destinationCity}" th:text="${destinationCity.displayEnum}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-sm-12">
+                        <div class="input-group date" id="datepicker">
+                            <input type="text" class="form-control" th:field="*{departureDate}"
+                                   placeholder="Select departure date" required style="background-color:#dedbcc;">
+                            <span class="input-group-append">
+                            <span class="input-group-text" style="background-color:#dedbcc;">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-sm-12">
+                        <div class="input-group date" id="datetimepicker1">
+                            <input type="time" class="form-control" th:field="*{departureHour}"
+                                   placeholder="Departure hour" required style="background-color:#dedbcc;">
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                 $(function() {
+                    $('#datepicker').datepicker({
+                    format: 'dd/mm/yyyy'
+                    });
+                  });
+                </script>
+
+                <div class="form-group row">
+                    <div class="col-sm-12" align="center">
+                        <select class="form-control selectpicker" th:field="*{airlineName}" id="airlineName" required style="background-color:#dedbcc;">
+                            <option value="">Select Airline name</option>
+                            <option th:each="airlineName : ${T(flightBooking.entity.Airline).values()}"
+                                    th:value="${airlineName}" th:text="${airlineName.displayEnum}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <select class="form-control" th:field="*{gateNumber}" style="background-color:#dedbcc;">
+                            <option value="">Select gate number</option>
+                            <option th:each="i : ${#numbers.sequence(0, 10)}" th:value="${i}"
+                                    th:text="${i}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-6 col-form-label">Economy&nbsp;class&nbsp;ticket&nbsp;price(&euro;):</label>
+                    <div class="col-sm-6">
+                        <input type="text" th:field="*{economyClassTicketPrice}" onfocus=this.value="" required style="background-color:#dedbcc;"/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-6 col-form-label">Business&nbsp;class&nbsp;seats:</label>
+                    <div class="col-sm-6">
+                        <input type="text" th:field="*{businessClassSeats}" onfocus=this.value="" required style="background-color:#dedbcc;"/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-6 col-form-label">Economy&nbsp;class&nbsp;seats:</label>
+                    <div class="col-sm-6">
+                        <input type="text" th:field="*{economyClassSeats}" onfocus=this.value="" required style="background-color:#dedbcc;"/>
+                    </div>
+                </div>
+                <input type="hidden" th:field="*{availableSeats}"/>
+            </div>
+
+            <div class="card-footer" style="background-color:#dedbcc;"><br>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success text-body">Update flight</button>
+                </div><br>
+            </div>
+        </form>
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

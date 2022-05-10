@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ticket</title>
+    <div th:replace="fragments/header :: header"></div>
+    <style>
+           .container-fluid{
+            padding-top: 4vh;
+            padding-bottom: 10vh;
+        }
+
+    </style>
+</head>
+<body style="background-color:#f2eddf;">
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container-fluid" style="max-width:1100px; margin:0 auto">
+
+    <div th:switch="${flights}">
+
+        <div class="card">
+
+            <ul class="list-group" th:each="ticket, iterStat : ${tickets}">
+                <div class="card-header" style="background-color:#dedbcc;">
+                </div>
+
+                <div class="card-body" style="background-color:#ebe3cd;">
+                    <div class="row">
+                        <div class="col-6 align-middle text-center" style="background-color:#dedbcc;">
+                            <h3 th:text="'BOARDING PASS: ' + ${ticket.ticketNo}"></p> </h3>
+                            <hr>
+                            <h5>
+                                <div align="center">Flight</div>
+                                <br>
+                                <div th:text="'&quot;' +
+                ${flight.departureCity.displayEnum}+'&quot;'+' &#x2192; ' +'&quot;'+${flight.destinationCity.displayEnum}+'&quot;'"></div>
+                            </h5>
+                            <hr>
+                            <h5 th:text="'Airline Company: ' + ${flight.airlineName}"></h5>
+                        </div>
+                        <div class="col-6 align-middle text-center" style="background-color:#ebe3cd;">
+                            <div class="text-center" align="center">
+                                <h4>Passenger name: <i><span th:text="${ticket.passenger.fullName}"></span></i></h4>
+                            </div>
+                            <hr>
+                            <div class="form-group row align-middle">
+
+                                <div class="form-group col-sm-4">
+                                    <label for="gateNumber">Gate number:</label>
+                                    <h5 type="text" id="gateNumber" th:text="${flight.gateNumber}"
+                                        readonly style="background-color:#dedbcc;"></h5>
+                                </div>
+
+                                <div class="form-group col-sm-4">
+                                    <label for="seatNo">Seat number:</label>
+                                    <h5 type="text" id="seatNo"
+                                        th:text="${ticket.seatNo}" readonly
+                                        style="background-color:#dedbcc;"></h5>
+                                </div>
+
+                                <div class="form-group col-sm-4">
+                                    <label for="airlineName">Seat type:</label>
+                                    <h5 type="text" id="airlineName"
+                                        th:text="${ticket.passenger.classType}"
+                                        readonly style="background-color:#dedbcc;"></h5>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="form-group col-sm-4">
+                                    <label for="departureDate">Departure date:</label>
+                                    <h5 type="text" id="departureDate"
+                                        th:text="${flight.departureDate}"
+                                        readonly style="background-color:#dedbcc;"></h5>
+                                </div>
+
+                                <div class="form-group col-sm-4">
+                                    <label for="departureHour">Departure hour:</label>
+                                    <h5 type="text" id="departureHour"
+                                        th:text="${flight.departureHour}"
+                                        readonly style="background-color:#dedbcc;"></h5>
+                                </div>
+
+                                <div class="form-group col-sm-4">
+                                    <label for="checkedBaggage">Checked baggage:</label>
+                                    <h5 type="text" id="checkedBaggage"
+                                        th:text="${ticket.passenger.checkedBaggage}" readonly
+                                        style="background-color:#dedbcc;"></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-footer" style="background-color:#dedbcc;"></div>
+                <div style="background-color:#f2eddf;"><br></div>
+            </ul>
+        </div>
+    </div>
+    <br><br>
+    <div class="text-center">
+        <!--        <a th:href="@{ticket.html}" download class="btn btn-success btn-large text-body"><b>Download ticket(s)</b></b></a>-->
+        <a th:href="@{'/index'}" class="btn btn-success btn-large text-body"><b>Go to Home page</b></b></a>
+
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

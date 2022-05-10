@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Payment</title>
+    <div th:replace="fragments/header :: header"></div>
+    <style>
+           .container-fluid{
+            padding-top: 12vh;
+            padding-bottom: 8vh;
+        }
+
+    </style>
+</head>
+<body style="background-color:#f2eddf;">
+<div th:replace="fragments/navbar :: navbar"></div>
+<div class="container-fluid text-center" style="max-width:520px; margin:0 auto" align="center">
+    <form action="#" th:action="@{'/flight/payment/' + ${booking.id}}" method="post" th:object="${booking}">
+<!--        <div class="row">-->
+<!--            <div class="col-md-4"></div>-->
+<!--            <div class="col-md-6">&nbsp;&nbsp;-->
+
+<!--                <div class="row">-->
+<!--                    <div class="col-sm-6">-->
+                        <div class="card">
+                            <div class="card-header" style="background-color:#dedbcc;"><br>
+                                <div align="center">
+                                    <h3>Total amount: <span th:text="${bookingTotalAmount} + '&euro;'"></span></h3>
+                                </div>
+                                <br>
+                            </div>
+                            <div class="card-body" style="background-color:#ebe3cd;">
+                                <div align="center">
+                                    <h5>Please enter your card details</h5>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="name">Name</label>
+                                            <input class="form-control" id="name" type="text"
+                                                   placeholder="Enter your name" style="background-color:#dedbcc;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="ccnumber">Credit Card Number</label>
+                                            <div class="input-group">
+                                                <input class="form-control" id="ccnumber" type="text"
+                                                       placeholder="0000 0000 0000 0000" autocomplete="email"
+                                                       maxlength="19" style="background-color:#dedbcc;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-sm-4">
+                                        <label for="ccmonth">Expiration month:</label>
+                                        <select class="form-control" id="ccmonth" style="background-color:#dedbcc;">
+                                            <option value="">Month</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
+                                            <option>11</option>
+                                            <option>12</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label for="ccyear">Expiration year:</label>
+                                        <select class="form-control" id="ccyear" style="background-color:#dedbcc;">
+                                            <option value="">Year</option>
+                                            <option>2022</option>
+                                            <option>2023</option>
+                                            <option>2024</option>
+                                            <option>2025</option>
+                                            <option>2026</option>
+                                            <option>2027</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="cvv">CVV/CVC</label>
+                                            <input class="form-control" id="cvv" type="text" placeholder="123"
+                                                   maxlength="3" style="background-color:#dedbcc;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer" align="center" style="background-color:#dedbcc;">
+                                <div class="my-3">
+                                    <!--                                    <button type="submit" class="btn btn-primary btn-lg"><b>Pay ticket</b></button>-->
+                                    <a th:href="@{'/flight/ticket/' + ${booking.id}}">
+                                        <button type="submit" class="btn btn-success col-sm-4 text-body"
+                                                data-toggle="tooltip"
+                                                data-html="true"
+                                                data-placement="top"
+                                                th:attr="title='Book flight from '+'&quot;' +${booking.departureCity.displayEnum}+'&quot;'+' to ' +'&quot;'+${booking.destinationCity.displayEnum}+'&quot;'"
+
+                                                th:disabled="${flight.availableSeats eq 0}">
+                                            <b>Pay</b>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-md-2"></div>-->
+<!--        </div>-->
+    </form>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
